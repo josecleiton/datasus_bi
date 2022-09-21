@@ -1,9 +1,7 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity({
-  name: 'cities',
-})
-export class City {
+@Entity({ name: 'health_organizations' })
+export class HealthOrganization {
   @PrimaryColumn()
   id!: string;
   @Column()

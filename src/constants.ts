@@ -1,1 +1,1 @@
-export const IBGE_STATE_CODE = "27";
+export const IBGE_STATE_CODE = '27';

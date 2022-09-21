@@ -1,5 +1,5 @@
-import * as XLSX from "xlsx";
-import { Readable } from "stream";
+import * as XLSX from 'xlsx';
+import { Readable } from 'stream';
 
 XLSX.stream.set_readable(Readable);
 
@@ -16,8 +16,8 @@ export default function loadOdsAndExec<TInput, TResult = unknown>({
     const promises: Promise<TResult>[] = [];
     XLSX.stream
       .to_json(XLSX.readFile(path))
-      .on("data", (row: TInput) => promises.push(exec(row)))
-      .on("end", async () => {
+      .on('data', (row: TInput) => promises.push(exec(row)))
+      .on('end', async () => {
         try {
           resolve(await Promise.all(promises));
         } catch (e) {
