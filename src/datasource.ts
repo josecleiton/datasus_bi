@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -7,4 +8,5 @@ export const dataSource = new DataSource({
   username: 'datasus',
   password: process.env.DB_PASSWORD,
   synchronize: true,
+  namingStrategy: new SnakeNamingStrategy(),
 });
