@@ -1,9 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { City } from './city';
-import { Diagnostic } from './diagnostic';
+import { Cid } from './cid';
 import { HealthOrganization } from './health-organization';
 import { Pacient } from './pacient';
-import { Procedure } from './procedure';
 
 @Entity({ name: 'hospitalizations' })
 export class Hospitalization {
@@ -38,19 +37,19 @@ export class Hospitalization {
   @ManyToOne(() => City, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ referencedColumnName: 'pacient_id' })
   pacientCity!: City;
-  @ManyToOne(() => Diagnostic, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @ManyToOne(() => Cid, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ referencedColumnName: 'diagnostic_id' })
-  diagnostic!: Diagnostic;
+  diagnostic!: Cid;
   @ManyToOne(() => HealthOrganization, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ referencedColumnName: 'health_organization_id' })
   healthOrganization!: HealthOrganization;
-  @ManyToOne(() => Procedure, {
+  @ManyToOne(() => Cid, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ referencedColumnName: 'procedure_id' })
-  procedure!: Procedure;
+  procedure!: Cid;
 }

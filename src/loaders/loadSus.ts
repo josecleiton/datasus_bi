@@ -5,16 +5,14 @@ import { EntityManager } from 'typeorm';
 
 import loadCsvAndExec from 'src/helpers/loadCsvAndExec';
 import { City } from 'src/models/city';
-import { Diagnostic } from 'src/models/diagnostic';
+import { Cid } from 'src/models/cid';
 import { Gender } from 'src/models/enums/gender.enum';
 import { Hospitalization } from 'src/models/hospitalization';
 import { Pacient } from 'src/models/pacient';
-import { Procedure } from 'src/models/procedure';
 
 interface Dimensions {
   cities: City[];
-  procedures: Procedure[];
-  diagnostics: Diagnostic[];
+  cids: Cid[];
 }
 
 interface RawHospitalization {
