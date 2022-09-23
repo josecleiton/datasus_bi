@@ -5,6 +5,7 @@ import { Cid } from './models/cid';
 import { HealthOrganization } from './models/health-organization';
 import { Pacient } from './models/pacient';
 import { Hospitalization } from './models/hospitalization';
+import { Procedure } from './models/procedure';
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -12,7 +13,15 @@ export const dataSource = new DataSource({
   database: 'datasus',
   username: 'datasus',
   password: process.env.DB_PASSWORD,
-  entities: [City, Cid, HealthOrganization, Pacient, Hospitalization],
+  entities: [
+    City,
+    Cid,
+    HealthOrganization,
+    Procedure,
+    Pacient,
+    Hospitalization,
+  ],
   synchronize: true,
   namingStrategy: new SnakeNamingStrategy(),
+  logger: 'debug',
 });

@@ -2,7 +2,7 @@ import { join } from 'path';
 import loadOdsAndExec from '../helpers/loadOdsAndExec';
 import { IBGE_STATE_CODE } from '../constants';
 import { EntityManager } from 'typeorm';
-import { City } from 'src/models/city';
+import { City } from '../models/city';
 
 interface IbgeCity {
   UF: string;

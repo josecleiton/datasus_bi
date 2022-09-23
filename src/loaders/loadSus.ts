@@ -3,16 +3,18 @@ import { readdirSync } from 'fs';
 import { join } from 'path';
 import { EntityManager } from 'typeorm';
 
-import loadCsvAndExec from 'src/helpers/loadCsvAndExec';
-import { City } from 'src/models/city';
-import { Cid } from 'src/models/cid';
-import { Gender } from 'src/models/enums/gender.enum';
-import { Hospitalization } from 'src/models/hospitalization';
-import { Pacient } from 'src/models/pacient';
+import loadCsvAndExec from '../helpers/loadCsvAndExec';
+import { City } from '../models/city';
+import { Cid } from '../models/cid';
+import { Gender } from '../models/enums/gender.enum';
+import { Hospitalization } from '../models/hospitalization';
+import { Pacient } from '../models/pacient';
+import { Procedure } from '../models/procedure';
 
 interface Dimensions {
   cities: City[];
   cids: Cid[];
+  procedures: Procedure[];
 }
 
 interface RawHospitalization {

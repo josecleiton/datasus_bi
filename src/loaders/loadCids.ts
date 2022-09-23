@@ -1,7 +1,7 @@
 import { join } from 'path';
-import loadCsvAndExec from 'src/helpers/loadCsvAndExec';
-import { Cid } from 'src/models/cid';
 import { EntityManager } from 'typeorm';
+import loadCsvAndExec from '../helpers/loadCsvAndExec';
+import { Cid } from '../models/cid';
 
 interface CidRaw {
   codigo: string;
@@ -15,7 +15,9 @@ export default async function loadDiagnostics(manager: EntityManager) {
 
   await loadCsvAndExec({
     path,
+    delimiter: ';',
     exec: async (cid: CidRaw) => {
+      console.log(cid);
       cids.push(
         repo.create({
           id: cid.codigo,

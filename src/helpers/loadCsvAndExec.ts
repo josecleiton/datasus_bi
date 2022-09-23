@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import csv from 'csv-parse';
+import { parse as csvParse } from 'csv-parse';
 
 interface LoadCsvOptions<TInput, TResult> {
   path: string;
@@ -15,7 +15,7 @@ export default function loadCsvAndExec<TInput, TResult = unknown>({
   return new Promise<TResult[]>((resolve, reject) => {
     const promises: Promise<TResult>[] = [];
     fs.createReadStream(path)
-      .pipe(csv.parse({ delimiter }))
+      .pipe(csvParse({ delimiter }))
       .on('data', (serializedRow: TInput) => promises.push(exec(serializedRow)))
       .on('end', async () => {
         try {

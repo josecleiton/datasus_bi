@@ -1,4 +1,4 @@
-﻿id;codproc;nome;sexo;idade_min;idade_max;vlr_sa;vlr_sh;vlr_sp;qtde_maxima;ptos_ato;dias_permanencia;complexidade;co_financiamento;co_rubrica;classeprimariaid;classesecundariaid
+﻿id;codproc;nome;
 1;0202030202;DOSAGEM DE PROTEINA C REATIVA                                                                                                                                                                                                                             ;I;0;130;2,83;0;0;9999;0;9999;2;06;      ;30;2
 2;0204010055;RADIOGRAFIA DE ARTICULACAO TEMPORO-MANDIBULAR BILATERAL                                                                                                                                                                                                   ;I;0;130;8,38;0;0;9999;0;9999;2;06;      ;30;2
 3;0211080055;ESPIROMETRIA OU PROVA DE FUNCAO PULMONAR COMPLETA COM BRONCODILATADOR                                                                                                                                                                                     ;I;0;130;6,36;0;0;9999;0;9999;2;06;      ;30;2

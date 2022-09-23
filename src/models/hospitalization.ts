@@ -3,12 +3,13 @@ import { City } from './city';
 import { Cid } from './cid';
 import { HealthOrganization } from './health-organization';
 import { Pacient } from './pacient';
+import { Procedure } from './procedure';
 
 @Entity({ name: 'hospitalizations' })
 export class Hospitalization {
   @PrimaryColumn()
   id!: string;
-  @Column()
+  @Column('uuid')
   pacientId!: string;
   @Column()
   pacientCityId!: string;
@@ -32,24 +33,24 @@ export class Hospitalization {
     onUpdate: 'CASCADE',
     cascade: true,
   })
-  @JoinColumn({ referencedColumnName: 'pacient_id' })
+  @JoinColumn({ name: 'pacient_id' })
   pacient!: Pacient;
   @ManyToOne(() => City, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @JoinColumn({ referencedColumnName: 'pacient_id' })
+  @JoinColumn({ name: 'pacient_city_id' })
   pacientCity!: City;
   @ManyToOne(() => Cid, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-  @JoinColumn({ referencedColumnName: 'diagnostic_id' })
+  @JoinColumn({ name: 'diagnostic_id' })
   diagnostic!: Cid;
   @ManyToOne(() => HealthOrganization, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ referencedColumnName: 'health_organization_id' })
+  @JoinColumn({ name: 'health_organization_id' })
   healthOrganization!: HealthOrganization;
-  @ManyToOne(() => Cid, {
+  @ManyToOne(() => Procedure, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ referencedColumnName: 'procedure_id' })
-  procedure!: Cid;
+  @JoinColumn({ name: 'procedure_id' })
+  procedure!: Procedure;
 }
