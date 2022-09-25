@@ -2,21 +2,35 @@ require('dotenv/config');
 
 import { dataSource } from './datasource';
 import loadCities from './loaders/loadCities';
-import loadCids from './loaders/loadCids';
+import loadDiagnostics from './loaders/loadDiagnostics';
 import loadSus from './loaders/loadSus';
 import loadProcedures from './loaders/loadProcedures';
+import loadHealthOrganization from './loaders/loadHealthOrganization';
 
 async function execute() {
   const ds = await dataSource.initialize();
-  const dimensions = await ds.manager.transaction(async (tx) => {
-    return {
-      cities: await loadCities(tx),
-      cids: await loadCids(tx),
-      procedures: await loadProcedures(tx),
-    };
+  // const [cities, cids, procedures] = await ds.manager.transaction(async (tx) =>
+  //   Promise.all([loadCities(tx), loadDiagnostics(tx), loadProcedures(tx)]),
+  // );
+
+  // const healthOrganizations = await loadHealthOrganization(ds.manager);
+
+  // console.log({
+  //   cities: cities.length,
+  //   cids: cids.length,
+  //   procedures: procedures.length,
+  //   healthOrganizations: healthOrganizations.length,
+  // });
+
+  const hospitalizations = await loadSus(ds.manager, {
+    cities: [],
+    cids: [],
+    procedures: [],
   });
-  console.log(dimensions);
-  await ds.manager.transaction((tx) => loadSus(tx, dimensions));
+
+  console.log({
+    hospitalizations: hospitalizations.length,
+  });
 }
 
 execute().catch(console.error);

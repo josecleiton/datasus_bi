@@ -7,15 +7,17 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start:prod": "node dist/main",
+    "start": "node dist/etl",
+    "build_run": "tsc && node dist/etl",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
-    "csv-parse": "^5.3.0",
+    "csvtojson": "^2.0.10",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.2",
+    "lodash": "^4.17.21",
     "pg": "^8.8.0",
     "typeorm": "^0.3.10",
     "typeorm-naming-strategies": "^4.1.0",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/jest": "28.1.8",
+    "@types/lodash": "^4.14.185",
     "@types/node": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",

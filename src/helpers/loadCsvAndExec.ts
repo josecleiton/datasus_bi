@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { parse as csvParse } from 'csv-parse';
+import csv = require('csvtojson');
 
 interface LoadCsvOptions<TInput, TResult> {
   path: string;
@@ -14,15 +14,23 @@ export default function loadCsvAndExec<TInput, TResult = unknown>({
 }: LoadCsvOptions<TInput, TResult>) {
   return new Promise<TResult[]>((resolve, reject) => {
     const promises: Promise<TResult>[] = [];
-    fs.createReadStream(path)
-      .pipe(csvParse({ delimiter }))
-      .on('data', (serializedRow: TInput) => promises.push(exec(serializedRow)))
-      .on('end', async () => {
-        try {
-          resolve(await Promise.all(promises));
-        } catch (e) {
-          reject(e);
-        }
-      });
+    csv({ delimiter })
+      .fromStream(fs.createReadStream(path))
+      .subscribe(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        (data: TInput, index) => {
+          promises.push(exec(data));
+        },
+        (err) => {
+          throw err;
+        },
+        async () => {
+          try {
+            resolve(await Promise.all(promises));
+          } catch (e) {
+            reject(e);
+          }
+        },
+      );
   });
 }

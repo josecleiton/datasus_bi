@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { City } from './models/city';
-import { Cid } from './models/cid';
+import { Diagnostic } from './models/diagnostic';
 import { HealthOrganization } from './models/health-organization';
 import { Pacient } from './models/pacient';
 import { Hospitalization } from './models/hospitalization';
@@ -15,7 +15,7 @@ export const dataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   entities: [
     City,
-    Cid,
+    Diagnostic,
     HealthOrganization,
     Procedure,
     Pacient,

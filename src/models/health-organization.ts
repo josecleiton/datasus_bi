@@ -5,5 +5,5 @@ export class HealthOrganization {
   @PrimaryColumn()
   id!: string;
   @Column()
-  name!: string;
+  document!: string;
 }

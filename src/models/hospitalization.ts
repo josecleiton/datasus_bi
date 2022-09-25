@@ -1,14 +1,22 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { City } from './city';
-import { Cid } from './cid';
+import { Diagnostic } from './diagnostic';
 import { HealthOrganization } from './health-organization';
 import { Pacient } from './pacient';
 import { Procedure } from './procedure';
 
 @Entity({ name: 'hospitalizations' })
 export class Hospitalization {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id!: string;
+  @Column()
+  code!: string;
   @Column('uuid')
   pacientId!: string;
   @Column()
@@ -38,9 +46,9 @@ export class Hospitalization {
   @ManyToOne(() => City, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'pacient_city_id' })
   pacientCity!: City;
-  @ManyToOne(() => Cid, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @ManyToOne(() => Diagnostic, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'diagnostic_id' })
-  diagnostic!: Cid;
+  diagnostic!: Diagnostic;
   @ManyToOne(() => HealthOrganization, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',

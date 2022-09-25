@@ -18,19 +18,15 @@ export default async function loadProcedures(manager: EntityManager) {
     'procedures.csv',
   );
   const repo = manager.getRepository(Procedure);
-  const procedures: Procedure[] = [];
 
-  await loadCsvAndExec({
+  const procedures = await loadCsvAndExec({
     path,
     delimiter: ';',
-    exec: async (procedure: ProcedureRaw) => {
-      procedures.push(
-        repo.create({
-          id: procedure.codproc,
-          name: procedure.nome,
-        }),
-      );
-    },
+    exec: async (procedure: ProcedureRaw) =>
+      repo.create({
+        id: procedure.codproc,
+        name: procedure.nome,
+      }),
   });
 
   return repo.save(procedures);

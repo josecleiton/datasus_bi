@@ -1,8 +1,7 @@
 import { join } from 'path';
-import loadOdsAndExec from '../helpers/loadOdsAndExec';
-import { IBGE_STATE_CODE } from '../constants';
 import { EntityManager } from 'typeorm';
 import { City } from '../models/city';
+import loadCsvAndExec from '../helpers/loadCsvAndExec';
 
 interface IbgeCity {
   UF: string;
@@ -18,24 +17,16 @@ export default async function loadCities(manager: EntityManager) {
     '..',
     'datasets',
     'dimensions',
-    'ibge_cities.ods',
+    'ibge_cities.csv',
   );
   const repo = manager.getRepository(City);
-  const cities: City[] = [];
-  await loadOdsAndExec({
+  const cities: City[] = await loadCsvAndExec({
     path,
-    exec: async (city: IbgeCity) => {
-      if (IBGE_STATE_CODE != city.UF) {
-        return undefined;
-      }
-
-      cities.push(
-        repo.create({
-          id: city['Código Município Completo'],
-          name: city.Nome_Município,
-        }),
-      );
-    },
+    exec: async (city: IbgeCity) =>
+      repo.create({
+        id: city['Código Município Completo'],
+        name: city.Nome_Município,
+      }),
   });
 
   return repo.save(cities);
