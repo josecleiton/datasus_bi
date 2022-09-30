@@ -18,10 +18,10 @@
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.2",
     "lodash": "^4.17.21",
+    "node-excel-stream": "^1.2.1",
     "pg": "^8.8.0",
     "typeorm": "^0.3.10",
-    "typeorm-naming-strategies": "^4.1.0",
-    "xlsx": "^0.18.5"
+    "typeorm-naming-strategies": "^4.1.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

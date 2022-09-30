@@ -1,4 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { EducationalLevel } from './enums/educational-level.enum';
+import { Ethnic } from './enums/ethnic.enum';
 import { Gender } from './enums/gender.enum';
 
 @Entity({ name: 'pacients' })
@@ -12,13 +14,11 @@ export class Pacient {
   @Column()
   isDead: boolean;
   @Column()
-  nationality: string;
-  @Column()
   childCount!: number;
-  @Column()
-  ethnic!: string;
+  @Column({ enum: Ethnic })
+  ethnic!: Ethnic;
   @Column()
   role!: string;
-  @Column()
-  educationLevel!: string;
+  @Column({ enum: EducationalLevel })
+  educationLevel!: EducationalLevel;
 }

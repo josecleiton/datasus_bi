@@ -8,6 +8,8 @@ import loadCsvAndExec from '../helpers/loadCsvAndExec';
 import { City } from '../models/city';
 import { Diagnostic } from '../models/diagnostic';
 import { Gender } from '../models/enums/gender.enum';
+import { EducationalLevel } from '../models/enums/educational-level.enum';
+import { Ethnic } from '../models/enums/ethnic.enum';
 import { Hospitalization } from '../models/hospitalization';
 import { Pacient } from '../models/pacient';
 import { Procedure } from '../models/procedure';
@@ -78,11 +80,10 @@ export default async function loadSus(
             pacient: pacientRepo.create({
               age: parseInt(value.IDADE),
               childCount: parseInt(value.NUM_FILHOS),
-              educationLevel: value.INSTRU,
-              ethnic: value.RACA_COR,
+              educationLevel: parseEducationalLevel(value.INSTRU),
+              ethnic: parseEthnic(value.RACA_COR),
               gender: gender,
               isDead: value.MORTE === '1' ? true : false,
-              nationality: value.NACIONAL,
               role: value.CBOR,
             }),
           });
@@ -100,4 +101,35 @@ export default async function loadSus(
   console.log('Loaded %d hospitalizations', hospitalizations.length);
 
   return hospitalizations;
+}
+
+function parseEducationalLevel(INSTRU: string): EducationalLevel {
+  switch (INSTRU) {
+    case '1':
+      return EducationalLevel.illiterate;
+    case '2':
+      return EducationalLevel.elementary;
+    case '3':
+      return EducationalLevel.highSchool;
+    case '4':
+      return EducationalLevel.college;
+    default:
+      return EducationalLevel.unknown;
+  }
+}
+function parseEthnic(RACA_COR: string): Ethnic {
+  switch (RACA_COR) {
+    case '1':
+      return Ethnic.white;
+    case '2':
+      return Ethnic.black;
+    case '3':
+      return Ethnic.latin;
+    case '4':
+      return Ethnic.asian;
+    case '5':
+      return Ethnic.native;
+    default:
+      return Ethnic.unknown;
+  }
 }
