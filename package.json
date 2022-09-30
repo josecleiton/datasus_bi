@@ -10,7 +10,8 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "node dist/etl",
-    "build_run": "tsc && node dist/etl",
+    "etl": "tsc && node dist/etl",
+    "report": "tsc && node dist/report",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
