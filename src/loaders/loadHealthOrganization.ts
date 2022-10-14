@@ -28,14 +28,10 @@ export default async function loadHealthOrganization(manager: EntityManager) {
     }),
   );
 
-  const organizations: HealthOrganization[] = [];
   for (const orgs of healthOrganizationMatrix) {
     await manager.transaction((tx) => tx.save(orgs));
     console.log('Saved %d', orgs.length);
-    organizations.push(...orgs);
   }
 
-  console.log('Saved %d health orgs', organizations.length);
-
-  return organizations;
+  return manager.find(HealthOrganization);
 }
